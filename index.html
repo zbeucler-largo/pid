@@ -5,32 +5,41 @@
     </head>
     <body>
         <div id="graph" style="width:1200px;height:500px;"></div>
-        <div id="controls" style="display: flex; flex-direction: row;">
-            <details>
-                <summary>Hint</summary>
-                We want to minimize the difference between the <strong>setpoint</strong> and the <strong>actual</strong>, AKA the <strong>error.</strong>
-            </details>
+        <div id="controls" style="display: flex; flex-direction: column;">
+            <form id="pidForm" style="display: flex; flex-wrap: wrap; gap: 20px;">
+                <div style="display: flex; align-items: center;">
+                    <label for="setpoint" style="margin-right: 10px;">Setpoint:</label>
+                    <input type="number" id="setpoint" name="setpoint" value="100">
+                </div>
 
-            <form id="pidForm">
-                <label for="setpoint">Setpoint:</label>
-                <input type="number" id="setpoint" name="setpoint" value="100"><br><br>
+                <div style="display: flex; align-items: center;">
+                    <label for="kp" style="margin-right: 10px;">Kp:</label>
+                    <input type="number" id="kp" name="kp" value="0" step="0.1">
+                </div>
 
-                <label for="kp">Kp:</label>
-                <input type="number" id="kp" name="kp" value="0" step="0.1"><br><br>
+                <div style="display: flex; align-items: center;">
+                    <label for="ki" style="margin-right: 10px;">Ki:</label>
+                    <input type="number" id="ki" name="ki" value="0" step="0.1">
+                </div>
 
-                <label for="ki">Ki:</label>
-                <input type="number" id="ki" name="ki" value="0" step="0.1"><br><br>
+                <div style="display: flex; align-items: center;">
+                    <label for="kd" style="margin-right: 10px;">Kd:</label>
+                    <input type="number" id="kd" name="kd" value="0" step="0.1">
+                </div>
 
-                <label for="kd">Kd:</label>
-                <input type="number" id="kd" name="kd" value="0" step="0.1"><br><br>
+                <div style="display: flex; align-items: center;">
+                    <label for="timeConstant" style="margin-right: 10px;">Time Constant:</label>
+                    <input type="number" id="timeConstant" name="timeConstant" value="1">
+                </div>
 
-                <label for="timeConstant">Time Constant:</label>
-                <input type="number" id="timeConstant" name="timeConstant" value="1"><br><br>
+                <div style="display: flex; align-items: center;">
+                    <label for="nsteps" style="margin-right: 10px;">Number of Steps:</label>
+                    <input type="number" id="nsteps" name="nsteps" value="50">
+                </div>
 
-                <label for="nsteps">Number of Steps:</label>
-                <input type="number" id="nsteps" name="nsteps" value="50"><br><br>
-
-                <button type="submit">Run Simulation</button>
+                <div style="display: flex; align-items: center;">
+                    <button type="submit">Run Simulation</button>
+                </div>
             </form>
             <style>
                 body {
@@ -69,16 +78,21 @@
                     background-color: #0056b3;
                 }
             </style>
-    
+
+    <details>
+        <summary>Hint</summary>
+        We want to minimize the difference between the <strong>setpoint</strong> and the <strong>actual</strong>, AKA the <strong>error.</strong>
+    </details>
+
         </div>
 
         <script>
-            // Function to run the PID simulation
+
             function runSimulation(setpoint, kp, ki, kd, timeConstant, nsteps) {
                 let setpoints = [];
                 let commands = []; // output (ex: pump speed)
                 let actuals = [0]; // measured system values (ex: flow meter)
-                let errors = []; 
+                let errors = [];
                 let integrator = 0;
 
                 // step through the simulation
@@ -122,21 +136,21 @@
                         mode: 'lines+markers',
                         name: 'commands',
                         line: { color: 'red' }
-                    }, 
+                    },
                     {
                         x: x,
                         y: setpoints,
                         mode: 'lines+markers',
                         name: 'setpoints',
                         line: { color: 'blue' }
-                    }, 
+                    },
                     {
                         x: x,
                         y: actuals,
                         mode: 'lines+markers',
                         name: 'actuals',
                         line: { color: 'purple' }
-                    }, 
+                    },
                     {
                         x: x,
                         y: errors,
@@ -181,3 +195,4 @@
         </script>
     </body>
 </html>
+
