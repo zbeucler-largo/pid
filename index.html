@@ -7,7 +7,7 @@
         <div id="graph" style="width:1200px;height:500px;"></div>
         <div id="controls" style="display: flex; flex-direction: row;">
             <details>
-                <summary>NOTE</summary>
+                <summary>Hint</summary>
                 We want to minimize the difference between the <strong>setpoint</strong> and the <strong>actual</strong>, AKA the <strong>error.</strong>
             </details>
 
@@ -107,7 +107,7 @@
                     commands.push(command);
 
                     // Simulate the process variable by applying the command to the previous actual
-                    const newActual = actuals.at(step) + command * time_constant;
+                    const newActual = actuals.at(step) + command * timeConstant;
                     actuals.push(newActual);
 
                 }
